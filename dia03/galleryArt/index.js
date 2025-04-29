@@ -40,7 +40,8 @@ ArtGallery = [
 // Create a search function that receives a work title as a parameter, and uses find to search for that specific work
 
 // const FindArt = (title) => {
-//     const art = ArtGallery.find((art) => art.title == title);
+//     title = title.toLowerCase().trim();
+//     const art = ArtGallery.find((art) => art.title.toLowerCase() == title);
 //     if (art) {
 //         console.log(`Art ID: ${art.id}`,
 //         `Artist: ${art.artist}`,
@@ -48,7 +49,7 @@ ArtGallery = [
 //         `Year: ${art.year}`,
 //         `Exhibited: ${art.isExhibited}`);
 //     } else {
-//         console.log("Obra no encontrada.");
+//         console.log("Work not found.");
 //     }
 // }
 
@@ -79,15 +80,16 @@ ArtGallery = [
 
 // Add a function that allows adding new works to the gallery array
 
-const addWork = (artist, title, year, isExhibited) => {
-    ArtGallery.push({id:ArtGallery.length + 1, artist, title, year, isExhibited})
-    ArtGallery.forEach((art) => {
-        console.log(`Art ID: ${art.id}`,
-            `Artist: ${art.artist}`,
-            `Title: ${art.title}`,
-            `Year: ${art.year}`,
-            `Exhibited: ${art.isExhibited}`);
-    })
-}
+// const addWork = (artist, title, year, isExhibited) => {
+//     ArtGallery.push({id:ArtGallery.length + 1, artist, title, year, isExhibited})
+//     ArtGallery.forEach((art) => {
+//         console.log(`Art ID: ${art.id}`,
+//             `Artist: ${art.artist}`,
+//             `Title: ${art.title}`,
+//             `Year: ${art.year}`,
+//             `Exhibited: ${art.isExhibited}`);
+//     })
+// }
 
-addWork("Frida Kahlo", "Las dos Fridas", 1939, true)
+// addWork("Frida Kahlo", "Las dos Fridas", 1939, true)
+
