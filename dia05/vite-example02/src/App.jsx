@@ -3,6 +3,15 @@ const App = () => {
     return num1 + num2
   }
   var name = "Alejandro"
+  const people = [{
+    name: 'Juan', age: 35
+  }, {
+    name: 'Maria', age: 20
+  },
+  {
+    name: 'Marcos', age: 27
+  }
+  ]
   return (
     <>
       <Hello name={name} />
@@ -12,6 +21,14 @@ const App = () => {
       <Button text="Hello" color="red" />
       <Button text="Hello 2" color="green" />
 
+
+      {
+        people.map(({ name, age }) => {
+          return (
+              <CardPeople name={name} age={age}/>
+          )
+        }
+        )}
     </>
   )
 }
@@ -47,6 +64,16 @@ const Hello3 = ({ name }) => {
       {name && <h1>Hello {name}</h1>}
     </>
   )
+}
+
+const CardPeople = ({ name, age }) => {
+  return (
+    <>
+      <div>{name}</div>
+      <span>{age}</span>
+    </>
+  )
+
 }
 
 export default App
