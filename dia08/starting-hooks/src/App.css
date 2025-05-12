@@ -61,6 +61,9 @@
 .tasklist button{
   margin: 10px;
 }
+.tasklist input{
+  margin: 10px;
+}
 ul {
   padding: 0;
   list-style: none;
