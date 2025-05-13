@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { use, useState } from 'react'
 import './App.css'
-
+import { imageGallery } from './data/gallerydata'
 function App() {
 
 
@@ -11,6 +11,7 @@ function App() {
       <InputEvents />
       <TaskList />
       <Form />
+      <Gallery />
     </>
   )
 }
@@ -102,15 +103,45 @@ const Form = () => {
   }
 
   const handleChange = (e) => {
-    setFormData(prevState => ({ ...prevState, [e.target.name]: e.target.value }))}
+    setFormData(prevState => ({ ...prevState, [e.target.name]: e.target.value }))
+  }
 
   return (
     <form className='tasklist' onSubmit={handleSubmit}>
       <h1>Form</h1>
-      <input type="text" value={formData.name} onChange={handleChange} placeholder='Name' name='name'/>
-      <input type="email" value={formData.email} onChange={handleChange} placeholder='Email' name='email'/>
+      <input type="text" value={formData.name} onChange={handleChange} placeholder='Name' name='name' />
+      <input type="email" value={formData.email} onChange={handleChange} placeholder='Email' name='email' />
       <button type='submit'>Send</button>
     </form>
+  )
+}
+
+const Gallery = () => {
+  const [position, setPosition] = useState(0)
+
+  const handlePrevious = () => {
+    if (position - 1 === -1) {
+      setPosition(imageGallery.length - 1)
+    } else {
+      setPosition(prevState => prevState - 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (position + 1 === imageGallery.length) {
+      setPosition(0)
+    } else {
+      setPosition(prevState => prevState + 1)
+    }
+  }
+  return (
+    <div className='movie-section'>
+      <img src={imageGallery[position].url} className='movie-img' />
+      <h2>{imageGallery[position].title}</h2>
+
+      <button onClick={handlePrevious}>Prev</button>
+      <button onClick={handleNext}>Next</button>
+    </div>
   )
 }
 
