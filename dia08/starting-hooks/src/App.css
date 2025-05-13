@@ -69,9 +69,21 @@ ul {
   list-style: none;
   width: 100%;
 }
+.container-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .movie-section button{
   margin: 10px;
 }
 .movie-img{
   height: 500px;
+}
+.img-buttons{
+  display: flex;
+  align-items: center;
+}
+.img-buttons img{
+  height: 100px;
 }
