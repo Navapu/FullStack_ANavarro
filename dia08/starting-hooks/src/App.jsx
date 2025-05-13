@@ -2,6 +2,7 @@ import { use, useState } from 'react'
 import './App.css'
 import { imageGallery } from './data/gallerydata'
 function App() {
+  const randomnumber = Math.floor(Math.random() * 100) + 1;
 
 
   return (
@@ -12,6 +13,7 @@ function App() {
       <TaskList />
       <Form />
       <Gallery />
+      <Game randomnumber={randomnumber}/>
     </>
   )
 }
@@ -134,8 +136,8 @@ const Gallery = () => {
       setPosition(prevState => prevState + 1)
     }
   }
-  const prevImg = (position === 0) ? imageGallery.length - 1 : position -1
-  const nextImg = (position === imageGallery.length -1 ) ? 0 : position + 1
+  const prevImg = (position === 0) ? imageGallery.length - 1 : position - 1
+  const nextImg = (position === imageGallery.length - 1) ? 0 : position + 1
   return (
     <div className='movie-section'>
       <img src={imageGallery[position].url} className='movie-img' />
@@ -150,6 +152,29 @@ const Gallery = () => {
           <img src={imageGallery[nextImg].url} />
         </div>
       </div>
+    </div>
+  )
+}
+
+const Game = ({randomnumber}) => {
+  const [userNumber, setUserNumber] = useState(0)
+  const [state, setState] = useState("")
+
+  const checkNumber = () => {
+    if (userNumber > randomnumber) {
+      setState("Lower")
+    } else if (userNumber < randomnumber) {
+      setState("Higher")
+    } else {
+      setState("You are right !!")
+    }
+  }
+  return (
+    <div className='div-number'>
+      <h1>Guess the number</h1>
+      <input type="number" value={userNumber} onChange={(e) => setUserNumber(e.target.value)}/>
+      <button onClick={checkNumber}>Check</button>
+      <p>{state}</p>
     </div>
   )
 }
