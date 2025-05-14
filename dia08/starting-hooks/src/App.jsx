@@ -9,7 +9,8 @@ import Gallery from './components/Gallery';
 import Game from './components/Game';
 import TextArea from './components/TextArea';
 import Timer from './components/Timer';
-import Calculator from './components/Calculator';
+import Calculator from './components/Calculator'
+import Cart from './components/Cart';
 function App() {
   const randomnumber = Math.floor(Math.random() * 100) + 1;
 
@@ -25,6 +26,7 @@ function App() {
       <TextArea />
       <Timer />
       <Calculator />
+      <Cart />
     </>
   )
 }
