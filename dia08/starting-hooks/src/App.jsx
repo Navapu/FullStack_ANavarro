@@ -13,9 +13,10 @@ function App() {
       <TaskList />
       <Form />
       <Gallery />
-      <Game randomnumber={randomnumber}/>
+      <Game randomnumber={randomnumber} />
       <TextArea />
       <Timer />
+      <Calculator />
     </>
   )
 }
@@ -158,7 +159,7 @@ const Gallery = () => {
   )
 }
 
-const Game = ({randomnumber}) => {
+const Game = ({ randomnumber }) => {
   const [userNumber, setUserNumber] = useState(0)
   const [state, setState] = useState("")
 
@@ -174,7 +175,7 @@ const Game = ({randomnumber}) => {
   return (
     <div className='div-number'>
       <h1>Guess the number</h1>
-      <input type="number" value={userNumber} onChange={(e) => setUserNumber(e.target.value)}/>
+      <input type="number" value={userNumber} onChange={(e) => setUserNumber(e.target.value)} />
       <button onClick={checkNumber}>Check</button>
       <p>{state}</p>
     </div>
@@ -191,7 +192,7 @@ const TextArea = () => {
     const auxWords = (e.target.value.trim().split(" ") == '') ? 0 : e.target.value.trim().split(" ").length
     setWords(auxWords)
   }
-  return(
+  return (
     <div>
       <textarea cols="30" rows="10" value={userText} onChange={handleChange}></textarea>
       <p>Words: {words}</p>
@@ -227,13 +228,50 @@ const Timer = () => {
     setTime(0)
   }
 
-  return(
+  return (
     <div className='movie-section'>
       <h1>Timer</h1>
       <h2>{time}</h2>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
       <button onClick={handleReset}>Reset</button>
+    </div>
+  )
+}
+
+const Calculator = () => {
+  const [result, setResult] = useState(0)
+  const [calcData, setCalcData] = useState({
+    num1: 0,
+    num2: 0,
+    operator: "+"
+  })
+
+  const handleChange = (e) => {
+    setCalcData(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  const handleCalculate = () => {
+    switch(calcData.operator){
+      case "+": setResult(Number(calcData.num1) + Number(calcData.num2)); break;
+      case "-": setResult(calcData.num1-calcData.num2); break;
+      case "*": setResult(calcData.num1*calcData.num2); break;
+      case "/": setResult(calcData.num1/calcData.num2); break;
+    }
+  }
+  return (
+    <div>
+      <h1>Calculator</h1>
+      <input type="number" value={calcData.num1} name='num1' onChange={handleChange}/>
+      <select name="operator" id="" value={calcData.operator} onChange={handleChange}>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="number" value={calcData.num2} name="num2"onChange={handleChange}/>
+      <button onClick={handleCalculate}>=</button>
+      <p>Result: {result}</p>
     </div>
   )
 }
