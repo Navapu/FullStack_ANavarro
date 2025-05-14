@@ -107,3 +107,58 @@ ul {
 .calculator select{
   border: 0px
 }
+
+.div-cart {
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.div-cart h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.div-cart input {
+  box-sizing: border-box;
+
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  display: block;
+}
+
+.div-cart button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.div-cart ul {
+  list-style: none;
+}
+
+.div-cart li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.div-cart h2 {
+  text-align: right;
+  margin-top: 20px;
+  color: #222;
+}

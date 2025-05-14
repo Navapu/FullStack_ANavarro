@@ -5,8 +5,8 @@ const Cart = () => {
         item: "",
         price: 0
     })
-    const [cart, setCart] = useState([{}])
-    const [total, setTotal] = useState(0)
+
+    const [cart, setCart] = useState([])
     const handleChange = (e) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
@@ -14,11 +14,14 @@ const Cart = () => {
     const handleAdd = () => {
         if (formData.item === "") { return; }
         if (formData.price === 0) { return; }
-        setCart([...cart, { item: formData.item, price: formData.price }])
+        setCart([...cart, { item: formData.item, price: Number(formData.price)}])
         setFormData({ item: "", price: 0 })
     }
+    
+    const totalPrice = cart.reduce((acc, curr) => acc + curr.price, 0)
+
     return (
-        <div>
+        <div className="div-cart">
             <h1>Cart</h1>
 
             <input type="text" value={formData.item} onChange={handleChange} name="item" />
@@ -27,11 +30,10 @@ const Cart = () => {
 
             <ul>
                 {cart.map(({ item, price }, idx) => {
-                    return item != undefined && <li key={idx}>{item}: {price}</li>
+                    return item != undefined && <li key={idx}>{item}: {price}€</li>
                 })}
             </ul>
-            <h2>Total: {total}</h2>
-
+            <h2>Total: {totalPrice}€</h2>
         </div>
     )
 }
