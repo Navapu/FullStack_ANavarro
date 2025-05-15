@@ -20,6 +20,8 @@ const Cart = () => {
     
     const totalPrice = cart.reduce((acc, curr) => acc + curr.price, 0)
 
+    const styletotalPrice = (totalPrice > 100) ? 'h2-price' : null
+
     return (
         <div className="div-cart">
             <h1>Cart</h1>
@@ -33,7 +35,7 @@ const Cart = () => {
                     return item != undefined && <li key={idx}>{item}: {price}€</li>
                 })}
             </ul>
-            <h2>Total: {totalPrice}€</h2>
+            <h2 className={styletotalPrice}>Total: {totalPrice}€</h2>
         </div>
     )
 }

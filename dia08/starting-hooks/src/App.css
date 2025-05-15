@@ -160,5 +160,7 @@ ul {
 .div-cart h2 {
   text-align: right;
   margin-top: 20px;
-  color: #222;
+}
+.h2-price{
+  color: tomato;
 }
