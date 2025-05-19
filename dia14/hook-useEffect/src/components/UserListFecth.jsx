@@ -3,12 +3,17 @@ import usersList from '../mocks/mockUser.json'
 const UserListFetch = () => {
     const [users, setUsers] = useState([])
     const [page, setPage] = useState(1)
+    const [isloading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
     useEffect(() => {
         fetchUsers()
     }, [])
 
     const fetchUsers = async () => {
         try{
+            setIsLoading(true)
+            // Cleaning up a possible previous error
+            setError(null)
             const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
             // Verify the answer
@@ -19,12 +24,17 @@ const UserListFetch = () => {
 
             setUsers(data)
         }catch(e){
+            setError(e.message)
             console.log("Error: ", {e})
+        }finally{
+            setIsLoading(false)
         }
     }
     return (
         <div>
             <h1>UserList</h1>
+            {isloading && (<div>Loading data...</div>)}
+            {error && (<div>Error loading the data: {error}</div>)}
             <ul>
                 {
                     users.map(({ id, name, email, website }) => (
