@@ -7,14 +7,14 @@ const UserListFetch = () => {
     const [error, setError] = useState(null)
     useEffect(() => {
         fetchUsers()
-    }, [])
+    }, [page])
 
     const fetchUsers = async () => {
         try{
             setIsLoading(true)
             // Cleaning up a possible previous error
             setError(null)
-            const response = await fetch("https://jsonplaceholder.typicode.com/users");
+            const response = await fetch(`https://jsonplaceholder.typicode.com/users?_page=${page}&_limit=3`);
 
             // Verify the answer
             if(!response.ok){
@@ -29,6 +29,15 @@ const UserListFetch = () => {
         }finally{
             setIsLoading(false)
         }
+    }
+
+    const prevPage = () => {
+        if(page - 1 < 1){return;};
+        setPage(prev => prev - 1)
+    }
+
+    const nextPage = () => {
+        setPage(prev => prev + 1)
     }
     return (
         <div>
@@ -45,6 +54,10 @@ const UserListFetch = () => {
                         </li>
                     ))
                 }
+                <div>
+                    <button onClick={prevPage} disabled={page === 1}>Previous</button>
+                    <button onClick={nextPage} disabled={users.length < 3}>Next</button>
+                </div>
             </ul>
         </div>
     );
