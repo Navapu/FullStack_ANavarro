@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import LocalStorage from './components/LocalStorage'
+import Father from './components/Father'
 function App() {
 
   useEffect(() => {
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <LocalStorage />
+      <Father />
     </>
   )
 }
