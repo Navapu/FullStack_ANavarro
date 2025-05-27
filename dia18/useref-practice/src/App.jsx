@@ -3,6 +3,7 @@ import './App.css'
 import Example0 from './components/Example0'
 import Previous from './components/Previous'
 import AntiSpam from './components/AntiSpam'
+import DetectClick from './components/DetectClick'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -11,6 +12,7 @@ function App() {
       <Example0 />
       <Previous />
       <AntiSpam />
+      <DetectClick />
     </>
   )
 }
