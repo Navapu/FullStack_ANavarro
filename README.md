@@ -10,7 +10,7 @@ As I progress through the course, I implement small projects, experiments, and e
 ### Frontend
 - **React.js**
   - Routing: (`Route`, `Routes`, `NavLink`, `useParams`, `useSearchParams`)
-  - Hooks: `useState`, `useRef`, `useContext`
+  - Hooks: `useState`, `useRef`, `useContext`, `useEffect`
   - REST API integration using `fetch`
   - State and event management
   - Reusable components
