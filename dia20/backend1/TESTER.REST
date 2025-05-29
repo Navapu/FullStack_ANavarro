@@ -1,0 +1,8 @@
+PATCH http://localhost:3000/contact/1?action=changePassword
+Content-Type: application/json
+
+{
+  "mail": "juan@cei.es",
+  "oldPass": "1234",
+  "newPass": "Ju4n-Ru13z!"
+}
