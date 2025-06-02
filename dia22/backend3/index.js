@@ -1,0 +1,20 @@
+import express from 'express'
+import {logMiddleware} from './middleware/logger.middleware.js';
+import { logs } from './db/logs.js';
+
+const app = express();
+
+
+app.use(express.json())
+app.use(logMiddleware);
+
+app.get("/", (req, res) => {
+    res.send('Middleware Playground')
+})
+app.get("/logs", (req, res) => {
+    res.json(logs)
+})
+
+app.listen(3000, () => {
+    console.log('Listening in port 3000')
+})
