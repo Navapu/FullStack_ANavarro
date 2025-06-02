@@ -11,6 +11,7 @@
 import { logs } from "../db/logs.js";
 export const logMiddleware = (req, res, next) => {
     const logEntry = {
+        id: req.requestID,
         date: new Date().toISOString(),
         method: req.method,
         url: req.originalUrl,

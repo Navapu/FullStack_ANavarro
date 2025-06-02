@@ -1,13 +1,13 @@
 import express from 'express'
 import {logMiddleware} from './middleware/logger.middleware.js';
 import { logs } from './db/logs.js';
-
+import { uniqueIDWare } from './middleware/uniqueid.middleware.js';
 const app = express();
 
 
 app.use(express.json())
+app.use(uniqueIDWare)
 app.use(logMiddleware);
-
 app.get("/", (req, res) => {
     res.send('Middleware Playground')
 })
