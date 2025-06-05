@@ -1,0 +1,3 @@
+// File to centralize all models into a single file so they can be used in controllers.
+
+export { User } from "./user.model.js";
