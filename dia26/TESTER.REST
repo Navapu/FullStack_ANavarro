@@ -6,3 +6,6 @@ Content-Type: application/json
   "username": "juan024",
   "email": "juan024@gmail.com"
 }
+
+###
+DELETE http://localhost:3000/users/6841f59cacdb5e84b9bfb9ff

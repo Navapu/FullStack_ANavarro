@@ -50,3 +50,27 @@ Model.insertMany([
     }
 ]);
 ```
+
+## Update methods
+```js
+// Update by ID and return the updated document
+Model.findByIdAndUpdate(id, { field: value, field2: value2 }, { new: true });
+
+// Update one document that matches a certain condition
+Model.updateOne({ field: value }, { $set: { field: "newValue" } });
+
+// Update multiple documents that match a certain condition
+Model.updateMany({ field: value }, { $set: { field: "newValue" } });
+```
+
+## Delete methods
+```js
+// Delete by ID
+Model.findByIdAndDelete(id);
+
+// Delete one document that matches a certain condition
+Model.deleteOne({ field: value });
+
+// Delete multiple documents that match a certain condition
+Model.deleteMany({ field: value });
+```

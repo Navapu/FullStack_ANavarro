@@ -54,3 +54,20 @@ export const getUserById = async (req, res, next) => {
         next(error)
     }
 }
+export const deleteUserById = async (req, res, next) => {
+    try{
+        const {id} = req.params;
+        const deleteUser = await User.findByIdAndDelete(id);
+
+        if(!deleteUser){
+            ResponseAPI.msg = 'User not found'
+            ResponseAPI.status = 'error'
+            return res.status(404).json(ResponseAPI)
+        }
+        ResponseAPI.msg = `User ${deleteUser.name} has been deleted`;
+        ResponseAPI.data = deleteUser;
+        res.status(200).json(ResponseAPI)
+    }catch(error){
+        next(error)
+    }
+}
