@@ -11,3 +11,19 @@ export const getUsers = async (req, res, next) => {
         next(error)
     }
 }
+
+export const createUser = async (req, res, next) => {
+    try{
+        const {name, username, email} = req.body;
+        await User.create({
+            name: name,
+            username: username,
+            email: email
+        })
+        res.status(200).json({
+            msg: `User: ${username} has been created`
+        })
+    }catch(error){
+        next(error)
+    }
+}
