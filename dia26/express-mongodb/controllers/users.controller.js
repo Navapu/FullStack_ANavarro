@@ -27,3 +27,15 @@ export const createUser = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getUserById = async (req, res, next) => {
+    try{
+        const {id} = req.params
+        const user = await User.findById(id);
+        res.status(200).json({
+            data: user
+        })
+    }catch(error){
+        next(error)
+    }
+}
