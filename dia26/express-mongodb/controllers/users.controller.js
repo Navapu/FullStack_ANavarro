@@ -1,12 +1,22 @@
 import { User } from "../db/models/index.js"
+
+const ResponseAPI = {
+    msg: "",
+    data: [],
+    status: 'ok'
+}
+
 export const getUsers = async (req, res, next) => {
     try {
-        console.log("Getting all the users...")
         const users = await User.find();
-        res.status(200).json({
-            msg: 'Users from our Database',
-            data: users
-        })
+        if(!users){
+            ResponseAPI.msg = 'Users not found'
+            ResponseAPI.status = 'error'
+            return res.status(404).json(ResponseAPI)
+        }
+        ResponseAPI.msg = 'Users obtained'
+        ResponseAPI.data = users
+        res.status(200).json(ResponseAPI)
     } catch (error) {
         next(error)
     }
@@ -15,14 +25,14 @@ export const getUsers = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
     try{
         const {name, username, email} = req.body;
-        await User.create({
+        const newUser = await User.create({
             name: name,
             username: username,
             email: email
         })
-        res.status(200).json({
-            msg: `User: ${username} has been created`
-        })
+        ResponseAPI.msg = `User: ${username} has been created`
+        ResponseAPI.data = newUser;
+        res.status(200).json(ResponseAPI)
     }catch(error){
         next(error)
     }
@@ -32,9 +42,14 @@ export const getUserById = async (req, res, next) => {
     try{
         const {id} = req.params
         const user = await User.findById(id);
-        res.status(200).json({
-            data: user
-        })
+        if(!user){
+            ResponseAPI.msg = 'User not found'
+            ResponseAPI.status = 'error'
+            return res.status(404).json(ResponseAPI)
+        }
+        ResponseAPI.msg = 'User obtained';
+        ResponseAPI.data = user;
+        res.status(200).json(ResponseAPI)
     }catch(error){
         next(error)
     }
