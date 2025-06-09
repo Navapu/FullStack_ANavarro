@@ -74,3 +74,66 @@ Model.deleteOne({ field: value });
 // Delete multiple documents that match a certain condition
 Model.deleteMany({ field: value });
 ```
+
+## Moongose advanced
+
+## Common Operators in Filters
+
+```js
+// Greater than 18 ($gt - Greater Than)
+Model.find({ age: { $gt: 18 } });
+
+// Update all items that do not have the 'age' field
+Model.updateMany({ age: { $exists: false } }, { $set: { age: 17 } });
+
+/*
+$eq: equal to
+$ne: not equal to
+$gt: greater than
+$gte: greater than or equal to
+$lt: less than
+$lte: less than or equal to
+$in: value is in the array
+$nin: value is not in the array
+$and: logical AND
+$or: logical OR
+*/
+
+// Advanced queries
+
+Model.find({ age: { $in: [25, 30, 35] } });
+Model.find({ age: { $nin: [25, 30, 35] } });
+
+// All conditions must be met
+Model.find({
+    $and: [
+        { age: { $gt: 21 } },
+        { name: 'Alejandro' }
+    ]
+});
+
+// At least one condition must be met
+Model.find({
+    $or: [
+        { age: { $gt: 21 } },
+        { name: 'Alejandro' }
+    ]
+});
+```
+
+## Useful Options
+
+```js
+// For updates
+{ new: true }      // Returns the updated document
+{ upsert: true }   // Updates the document, or inserts it if it doesn't exist
+
+// For queries
+.select('field1 field2')   // Select specific fields to return
+.limit(10)                 // Limit the number of results
+.skip(10)                  // Skip a specific number of results
+.sort({ field1: 1 })       // Sort results (1 ascending, -1 descending)
+
+// Example
+Model.find().select('name age').limit(10).skip(5).sort({ age: -1 });
+```
