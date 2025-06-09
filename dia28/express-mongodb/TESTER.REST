@@ -1,0 +1,21 @@
+POST http://localhost:3000/users/
+Content-Type: application/json
+
+{
+  "name": "Juan",
+  "username": "juan024",
+  "email": "juan024@gmail.com"
+}
+
+###
+DELETE http://localhost:3000/users/6841f59cacdb5e84b9bfb9ff
+
+###
+POST http://localhost:3000/products/
+Content-Type: application/json
+
+{
+  "name": "Product1",
+  "price": 0,
+  "owner": "6841d38a1006a50b365cba30"
+}
