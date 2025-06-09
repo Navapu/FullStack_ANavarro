@@ -137,3 +137,41 @@ Model.find({
 // Example
 Model.find().select('name age').limit(10).skip(5).sort({ age: -1 });
 ```
+
+# Relaciones entre modelos
+
+### One-to-Many
+
+A document can be related to multiple documents from another collection.
+Example:
+- A user can have many products []
+- A product can have a single owner
+
+```js
+
+// Product model
+const productSchema = new mongoose.Schema({
+    name: String,
+    price: Number,
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+}, options);
+export const Product = mongoose.model('Product', productSchema);
+
+// User model
+const userSchema = new mongoose.Schema({
+    name: String,
+    username: String,
+    email: String,
+    // Array of Product IDs
+    products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
+}, options);
+export const User = mongoose.model('User', userSchema);
+```
+
+## Using populate() in Queries
+
+The populate() method lets you replace referenced ObjectIds with actual document data.
+```js
+// Populate a single reference
+const products = await Product.find().populate("owner");
+```
