@@ -7,7 +7,7 @@ const Counter = () => {
     return ( 
         <div>
             <Button onClick={() => setNum(prev => prev + 1)}>
-                Click me {num}
+                Click me: {num}
             </Button>
         </div>
      );
