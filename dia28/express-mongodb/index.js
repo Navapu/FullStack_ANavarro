@@ -28,6 +28,6 @@ app.use('/products', productRouter);
 app.use(notFoundHandler);
 app.use(errorMiddleware);
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log('Listening in port 3000')
 })
