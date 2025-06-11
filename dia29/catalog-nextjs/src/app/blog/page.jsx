@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { getJsonPosts } from "@/server/posts";
+import { getJsonPosts, createPost } from "@/server/posts";
 import Link from "next/link"
 
 const Blog = async () => {
@@ -16,6 +16,14 @@ const Blog = async () => {
                 </li>
             ))}
             </ul>
+
+            <h3>Create Post</h3>
+            <form action={createPost} className="max-w-[400px] mx-auto mt-24">
+                <input type="text" name="title" placeholder="title" className="border p-2 m-2 w-full rounded"/>
+                <textarea name="content" className="border p-2 m-2 w-full rounded"></textarea>
+                <Button type="submit">Create Post</Button>
+
+            </form>
         </div>
     );
 }

@@ -6,6 +6,6 @@ export const Button = ({ children, onClick, size="md"}) => {
         lg: "py-3 px-6 text-lg"
     }
     return (
-        <button className={`bg-white text-gray-500 border rounded shadow ${sizeClasses[size]}`} onClick={onClick}>{children}</button>
+        <button className={`bg-white text-gray-500 border rounded shadow cursor-pointer ${sizeClasses[size]}`} onClick={onClick}>{children}</button>
     );
 }
