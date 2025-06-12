@@ -8,11 +8,12 @@ const Users = async () => {
     return (
         <div className="items-center justify-center h-full flex flex-col">
             <h1>I'm Users</h1>
-            <ul>
+            <ul className="grid grid-cols-3 gap-2 p-2">
                 {users.data.map(({_id, name, username}) => (
                     <li key={_id} className="mb-2">
+                        <Link href={`./users/${_id}`}>
                         <Card title={name}>{username}</Card>
-                        <Link href={`./users/${_id}`}><Button size="sm">View more...</Button></Link>
+                        </Link>
                     </li>
                 ))}
             </ul>
