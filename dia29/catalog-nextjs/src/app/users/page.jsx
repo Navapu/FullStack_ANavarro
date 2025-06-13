@@ -7,7 +7,7 @@ const Users = async () => {
     const users = await getUsers();
     return (
         <div className="items-center justify-center h-full flex flex-col">
-            <h1>I'm Users</h1>
+            <h1>I'm Users (MONGODB - EXPRESS)</h1>
             <ul className="grid grid-cols-3 gap-2 p-2">
                 {users.data.map(({_id, name, username}) => (
                     <li key={_id} className="mb-2">
