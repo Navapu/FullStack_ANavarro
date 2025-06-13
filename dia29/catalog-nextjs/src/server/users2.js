@@ -1,6 +1,9 @@
 "use server"
 import { connectDB } from "@/lib/db/mongodb"
 import { User } from "@/lib/db/models/user.model"
+import { revalidatePath } from "next/cache"
+
+
 const ResponseAPI = {
     msg: "",
     data: [],
@@ -37,5 +40,21 @@ export const getSingleUser = async (id) => {
     } catch (error) {
         console.error("Error getting the user: ", error);
     }
-
+}
+export const createUser = async (formData) => {
+    try {
+        const name = formData.get("name")
+        const username = formData.get("username")
+        const email = formData.get("email")
+        await connectDB();
+        const newUser = await User.create({
+            name,
+            username,
+            email
+        })
+        console.log('User created: ', newUser);
+        revalidatePath("/user2");
+    } catch (error) {
+        console.error(error)
+    }
 }

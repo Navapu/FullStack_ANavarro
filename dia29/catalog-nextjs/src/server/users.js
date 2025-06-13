@@ -21,5 +21,6 @@ export const createUser = async (formData) => {
         },
         body: JSON.stringify({ name, username, email })
     });
+    revalidatePath("/user");
     return res.json();
 }
