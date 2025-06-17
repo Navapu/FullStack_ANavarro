@@ -18,7 +18,9 @@ export const loginUser = async (req, res, next) => {
             ResponseAPI.status = 'error';
             return res.status(401).json(ResponseAPI);
         }
-        if (user.password != password) {
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
             ResponseAPI.msg = 'Invalid username or password';
             ResponseAPI.data = []
             ResponseAPI.status = 'error';
