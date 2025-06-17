@@ -88,6 +88,17 @@ export const registerUser = async (req, res, next) => {
 }
 export const getCurrentUser = async (req, res, next) => {
     try {
+        const userId = req.userId;
+        const currentUser = await authUser.findById(userId).select('-password');
+
+        if(!currentUser){
+            ResponseAPI.msg = 'User not found';
+            ResponseAPI.data = []
+            ResponseAPI.status = 'error';
+            return res.status(401).json(ResponseAPI);
+        }
+        ResponseAPI.msg = 'User found';
+        ResponseAPI.data= currentUser;
         return res.status(200).json(ResponseAPI);
 
     } catch (error) {

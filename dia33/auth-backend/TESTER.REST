@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODUxYTU3OTBmYzVkYzJkMmUzNWM1MDQiLCJuYW1lIjoiQWxlamFuZHJvIiwiaWF0IjoxNzUwMTg1NDQxLCJleHAiOjE3NTAxOTI2NDF9.YwplvrY_rAIuMQFOtSTriNz-AQhMAU4jMUvRniWXNVc
 POST {{domain}}/auth/register
 Content-Type: application/json
 
@@ -17,3 +17,6 @@ Content-Type: application/json
     "email": "alejandro@gmail.com",
     "password": 123456
 }
+###
+GET  {{domain}}/auth/me
+Authorization: Bearer {{token}}
