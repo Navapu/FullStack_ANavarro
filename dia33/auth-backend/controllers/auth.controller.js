@@ -1,5 +1,6 @@
 import { authUser } from "../db/models/index.js";
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import { JWT_SECRET } from '../config/config.js'
 const ResponseAPI = {
     msg: "",
@@ -53,13 +54,15 @@ export const registerUser = async (req, res, next) => {
         const existingUser = await authUser.findOne({ email });
         if (existingUser) {
             ResponseAPI.msg = 'This email is already in use';
+            ResponseAPI.data = [];
             ResponseAPI.status = 'error';
             return res.status(400).json(ResponseAPI);
         }
-
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt)
         const newUser = await authUser.create({
             email,
-            password,
+            password: hashedPassword,
             name
         })
 
@@ -80,6 +83,7 @@ export const registerUser = async (req, res, next) => {
             name: newUser.name,
             token
         };
+        ResponseAPI.status = "ok"
         return res.status(200).json(ResponseAPI);
 
     } catch (error) {
