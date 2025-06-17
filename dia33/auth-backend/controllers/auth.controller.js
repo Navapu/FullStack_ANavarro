@@ -8,6 +8,40 @@ const ResponseAPI = {
 }
 export const loginUser = async (req, res, next) => {
     try {
+        const { email, password } = req.body;
+
+        const user = await authUser.findOne({ email });
+        if (!user) {
+            ResponseAPI.msg = 'Invalid username or password';
+            ResponseAPI.data = []
+            ResponseAPI.status = 'error';
+            return res.status(401).json(ResponseAPI);
+        }
+        if (user.password != password) {
+            ResponseAPI.msg = 'Invalid username or password';
+            ResponseAPI.data = []
+            ResponseAPI.status = 'error';
+            return res.status(401).json(ResponseAPI);
+        }
+
+        const token = jwt.sign({
+            userId: user._id,
+            name: user.name
+        },
+            JWT_SECRET,
+            {
+                expiresIn: '2h'
+            }
+        );
+
+        ResponseAPI.msg = 'Correct login';
+        ResponseAPI.data = {
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            token
+        };
+        ResponseAPI.status = 'ok';
         return res.status(200).json(ResponseAPI);
     } catch (error) {
         next(error);

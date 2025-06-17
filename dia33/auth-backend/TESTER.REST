@@ -8,3 +8,12 @@ Content-Type: application/json
     "email": "alejandro@gmail.com",
     "password": 123456
 }
+
+###
+POST {{domain}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "alejandro@gmail.com",
+    "password": 123456
+}
