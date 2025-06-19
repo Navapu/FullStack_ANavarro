@@ -22,20 +22,20 @@ const Profile = () => {
             if(!response.ok || responseData.status === "error"){
                 throw new Error(responseData.msg);
             }
-            console.log(responseData)
-            setUser(responseData)
+            setUser(responseData.data);
         }catch(e){
             setError(e.message)
         }
     }
-    
+    const name = user?.name;
+    const email = user?.email;
     return ( 
         <div>
             <h1 className="text-2xl font-bold mb-4">Im' Profile (protected route)</h1>
 
             <div>
-                {/* <p>Welcome: <b>{name}</b></p>
-                <p>Email: <b>{email}</b></p> */}
+                <p>Welcome: <b>{name}</b></p>
+                <p>Email: <b>{email}</b></p>
                 <button>Logout</button>
             </div>
 
