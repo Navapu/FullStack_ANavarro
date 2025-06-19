@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router';
-import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
 
 const Profile = () => {
     const BACKEND_API = import.meta.env.VITE_BACKEND_API;
@@ -9,7 +7,6 @@ const Profile = () => {
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null)
 
-    const {user: userContext} = useContext(AuthContext);
     useEffect(() => {
         fetchUser();
     }, [])
@@ -47,8 +44,8 @@ const Profile = () => {
             <h1 className="text-2xl font-bold mb-4">Im' Profile (protected route)</h1>
 
             <div>
-                <p>Welcome: <b>{userContext.name}</b></p>
-                <p>Email: <b>{userContext.email}</b></p>
+                <p>Welcome: <b>{name}</b></p>
+                <p>Email: <b>{email}</b></p>
 
                 <button onClick={handleLogout} className="m-3">Logout</button>
             </div>

@@ -6,7 +6,7 @@ const Login = () => {
         email: "",
         password: ""    
     })
-    
+
     const [error, setError] = useState(null)
     const {login} = useContext(AuthContext);
 

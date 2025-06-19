@@ -1,41 +1,24 @@
 import { useState } from "react";
-import {useNavigate} from 'react-router';
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 const Register = () => {
     const [form, setForm] = useState({
         email: "",
         password: "",
         name: ""
     })
-    const navigate = useNavigate();
     const [error, setError] = useState(null);
+    const {register} = useContext(AuthContext);
+
     const handleChange = (e) => {
         setForm(prev => ({...prev, [e.target.name]: e.target.value}))
     }
-    const BACKEND_API = import.meta.env.VITE_BACKEND_API;
     const {email, name, password} = form;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await fetch(`${BACKEND_API}/auth/register`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(form)
-            });
-            const responseData = await response.json();
-
-            if(!response.ok || responseData.status === "error"){
-                throw new Error(responseData.msg)
-            }
-            console.log(responseData)
-
-            localStorage.setItem('token', responseData.data.token);
-            delete responseData.data.token;
-            localStorage.setItem('user', JSON.stringify(responseData.data));
-            setError(null)
-            navigate("/profile")
+            await register(form)
         }catch(e){
             setError(e.message)
         }

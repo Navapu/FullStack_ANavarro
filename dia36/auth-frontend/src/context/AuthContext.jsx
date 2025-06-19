@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import {useNavigate} from 'react-router';
+import { useNavigate } from 'react-router';
 
 
 export const AuthContext = createContext();
@@ -11,7 +11,7 @@ const getUser = () => {
 }
 const BACKEND_API = import.meta.env.VITE_BACKEND_API;
 
-export const AuthContextProvider = ({children}) => {
+export const AuthContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(getUser);
     const isLoggedIn = !!user;
@@ -27,7 +27,7 @@ export const AuthContextProvider = ({children}) => {
         });
         const responseData = await response.json();
 
-        if(!response.ok || responseData.status === "error"){
+        if (!response.ok || responseData.status === "error") {
             throw new Error(responseData.msg)
         }
         console.log(responseData)
@@ -37,16 +37,33 @@ export const AuthContextProvider = ({children}) => {
         localStorage.setItem('user', JSON.stringify(responseData.data));
         navigate("/profile");
     }
-    const register = async () => {
-        
+    const register = async (data) => {
+        const response = await fetch(`${BACKEND_API}/auth/register`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+
+        if (!response.ok || responseData.status === "error") {
+            throw new Error(responseData.msg)
+        }
+        console.log(responseData)
+
+        localStorage.setItem('token', responseData.data.token);
+        delete responseData.data.token;
+        localStorage.setItem('user', JSON.stringify(responseData.data));
+        navigate("/profile")
     }
     const logout = async () => {
-        
+
     }
 
 
     return (
-        <AuthContext.Provider value={{user, setUser, login, logout, register, isLoggedIn}}>
+        <AuthContext.Provider value={{ user, setUser, login, logout, register, isLoggedIn }}>
             {children}
         </AuthContext.Provider>
     )
