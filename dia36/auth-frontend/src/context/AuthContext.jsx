@@ -52,10 +52,7 @@ export const AuthContextProvider = ({ children }) => {
         }
         console.log(responseData)
 
-        localStorage.setItem('token', responseData.data.token);
-        delete responseData.data.token;
-        localStorage.setItem('user', JSON.stringify(responseData.data));
-        navigate("/profile")
+        await login({email: data.email, password: data.password})
     }
     const logout = async () => {
 
