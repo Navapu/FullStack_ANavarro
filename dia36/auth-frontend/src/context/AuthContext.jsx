@@ -11,7 +11,7 @@ const getUser = () => {
 }
 const BACKEND_API = import.meta.env.VITE_BACKEND_API;
 
-export const AuthContextProvider = ({ children }) => {
+const AuthContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(getUser);
     const isLoggedIn = !!user;
@@ -65,3 +65,4 @@ export const AuthContextProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
+export default AuthContextProvider
