@@ -1,0 +1,53 @@
+import { createContext, useState } from "react";
+import {useNavigate} from 'react-router';
+
+
+export const AuthContext = createContext();
+
+// Obtain data from LocalStorage
+const getUser = () => {
+    const localStorageUser = localStorage.getItem('user');
+    return localStorageUser ? JSON.parse(localStorageUser) : null;
+}
+const BACKEND_API = import.meta.env.VITE_BACKEND_API;
+
+export const AuthContextProvider = ({children}) => {
+
+    const [user, setUser] = useState(getUser);
+    const isLoggedIn = !!user;
+    const navigate = useNavigate();
+
+    const login = async (data) => {
+        const response = await fetch(`${BACKEND_API}/auth/login`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+
+        if(!response.ok || responseData.status === "error"){
+            throw new Error(responseData.msg)
+        }
+        console.log(responseData)
+
+        localStorage.setItem('token', responseData.data.token);
+        delete responseData.data.token;
+        localStorage.setItem('user', JSON.stringify(responseData.data));
+        navigate("/profile");
+    }
+    const register = async () => {
+        
+    }
+    const logout = async () => {
+        
+    }
+
+
+    return (
+        <AuthContext.Provider value={{user, setUser, login, logout, register, isLoggedIn}}>
+            {children}
+        </AuthContext.Provider>
+    )
+}
