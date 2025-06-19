@@ -12,9 +12,8 @@ const getUser = () => {
 const BACKEND_API = import.meta.env.VITE_BACKEND_API;
 
 const AuthContextProvider = ({ children }) => {
-
     const [user, setUser] = useState(getUser);
-    const isLoggedIn = !!user;
+    const isLoggedIn = user !== null;
     const navigate = useNavigate();
 
     const login = async (data) => {
@@ -35,6 +34,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem('token', responseData.data.token);
         delete responseData.data.token;
         localStorage.setItem('user', JSON.stringify(responseData.data));
+        setUser(response.data)
         navigate("/profile");
     }
     const register = async (data) => {
@@ -57,6 +57,7 @@ const AuthContextProvider = ({ children }) => {
     const logout = async () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        setUser(null)
         navigate("/login");
     }
     return (
