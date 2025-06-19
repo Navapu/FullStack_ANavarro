@@ -55,10 +55,10 @@ const AuthContextProvider = ({ children }) => {
         await login({email: data.email, password: data.password})
     }
     const logout = async () => {
-
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/login");
     }
-
-
     return (
         <AuthContext.Provider value={{ user, setUser, login, logout, register, isLoggedIn }}>
             {children}

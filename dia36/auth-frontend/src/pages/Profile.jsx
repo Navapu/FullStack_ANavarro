@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router';
-
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 const Profile = () => {
     const BACKEND_API = import.meta.env.VITE_BACKEND_API;
-    const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null)
+    const {logout} = useContext(AuthContext);
 
     useEffect(() => {
         fetchUser();
     }, [])
+
 
     const fetchUser = async () => {
         try {
@@ -33,12 +34,6 @@ const Profile = () => {
     }
     const name = user?.name;
     const email = user?.email;
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setUser(null);
-        navigate("/login");
-    }
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4">Im' Profile (protected route)</h1>
@@ -47,7 +42,7 @@ const Profile = () => {
                 <p>Welcome: <b>{name}</b></p>
                 <p>Email: <b>{email}</b></p>
 
-                <button onClick={handleLogout} className="m-3">Logout</button>
+                <button onClick={logout} className="m-3">Logout</button>
             </div>
 
             {error && <p className="text-red-400">{error}</p>}
